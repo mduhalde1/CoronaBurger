@@ -76,7 +76,7 @@ def Ingrediente_detail(request, numero):
         serializer = IngredienteSerializer(ingrediente)
         if ingrediente.hamburguesas.count() == 0:
             ingrediente.delete()
-            return Response("ingrediente eliminado",status=status.HTTP_204_NO_CONTENT)
+            return Response("ingrediente eliminado",status=status.HTTP_200_OK)
         else:
             return Response("Ingrediente no se puede borrar, se encuentra presente en una hamburguesa", status=status.HTTP_409_CONFLICT)
 
