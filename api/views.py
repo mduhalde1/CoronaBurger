@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
-url = 'www.coronaburger.com/api/ingrediente/'
+url = 'https://coronaburger.herokuapp.com/api/ingrediente/'
 
 @api_view(['GET', 'POST'])
 def Hamburguesa_list(request):
