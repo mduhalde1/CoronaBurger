@@ -17,7 +17,6 @@ def Hamburguesa_list(request):
         serializer = HamburguesaSerializer(hamburguesas, many=True)
         if hamburguesas.count() > 0:
             for j in range(hamburguesas.count()):
-                print('1')
                 ingredientes=[]
                 for i in serializer.data[j]['ingredientes']:
                     ingredientes.append({"path": url+str(i)})
@@ -25,10 +24,15 @@ def Hamburguesa_list(request):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        serializer = HamburguesaSimplifiedSerializer(data=request.data)
+        serializer = HamburguesaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            ingredientes=[]
+            for i in serializer.data['ingredientes']:
+                ingredientes.append({"path": url+str(i)})
+            new_data = serializer.data
+            new_data['ingredientes'] = ingredientes
+            return Response(new_data, status=status.HTTP_201_CREATED)
         return Response("input invalido", status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
