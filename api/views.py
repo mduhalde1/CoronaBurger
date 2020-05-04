@@ -28,7 +28,7 @@ def Hamburguesa_list(request):
         serializer = HamburguesaSimplifiedSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response("hamburguesa creada", status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response("input invalido", status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
@@ -45,7 +45,7 @@ def Ingrediente_list(request):
         serializer = IngredienteSimplifiedSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response("Ingrediente creado", status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response("Input invalido", status=status.HTTP_400_BAD_REQUEST)
 
 
